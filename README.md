@@ -1,32 +1,8 @@
-# 🚀 Spaces — A Real-Time Collaboration Platform (Frontend)
+# 🚀 AATC-RMS — AN INCIDENT AND REPORT MANAGEMENT SYSTEM
 
-**Spaces** is a real-time collaboration platform for academic use, designed for project-based communication between **students** and **supervisors** at Teesside University.
+**AATC-RMS** is a real-time collaboration platform for academic use, designed for project-based communication between **students** and **supervisors** at Teesside University.
 
 > This is the frontend application built with React, TypeScript, Tailwind CSS, and Vite.
-
----
-
-## 🌐 Live Demo
-
-🧪 [Try the app live](https://spaces-frontend-lovat.vercel.app)
-
-### 🔐 Demo Login
-
-Use the following credentials to explore the platform without signing up:
-
-- **Email:** `japahubs@gmail.com`
-- **Password:** `Qwerty78`
-
----
-
-## 📌 University Email Requirement
-
-Only users with a **Teesside University email** (`@live.tees.ac.uk`) can register.
-
-During registration, users must select their role:
-
-- 👨‍🏫 **Supervisor**
-- 🎓 **Student**
 
 ---
 
@@ -43,8 +19,8 @@ Frontend stack:
 
 ## ✨ Key Features
 
-- 🔐 University-only email registration
-- 👥 Role-based onboarding (Supervisor or Student)
+- 🔐 File upload and viewing
+- 👥 Role-based access (Super-User or Vendor)
 - ⚡ OTP verification
 - 🧘 Responsive User Interface
 
@@ -55,8 +31,8 @@ Frontend stack:
 ### 1. Clone the repository or download and open the ZIP file
 
 ```bash
-git clone https://github.com/prosper20/spaces-frontend.git
-cd spaces-frontend
+git clone https://github.com/pentagontechteam/rms.git
+cd rms
 ```
 
 ### 2. Install dependencies
@@ -72,8 +48,8 @@ yarn install
 Create a `.env` file in the root directory and add the following:
 
 ```env
-VITE_API_URL=https://spaces-frontend-omega.vercel.app
-VITE_APP_DOMAIN=https://spaces-frontend-omega.vercel.app
+VITE_API_URL=https://backend-url
+VITE_APP_DOMAIN=https://backend-url
 ```
 
 > These values are used to communicate with the backend and define the app’s domain origin.
