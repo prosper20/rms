@@ -125,7 +125,7 @@ const DashboardSidebar: React.FC<{
 								}
 
 								try {
-									const { key, url } = await uploadFileToS3(file);
+									const { key } = await uploadFileToS3(file);
 
 									// Create DB record
 									await axios.post(
@@ -134,7 +134,7 @@ const DashboardSidebar: React.FC<{
 											name: file.name,
 											type: file.type,
 											size: file.size,
-											url,
+											url: key,
 											path: key,
 											vendorId: authUser?.vendorId,
 										},
