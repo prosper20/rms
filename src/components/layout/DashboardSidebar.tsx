@@ -41,7 +41,7 @@ const DashboardSidebar: React.FC<{
 	const token = authHeader?.split(" ")[1];
 
 	const baseLinkClasses =
-		"flex items-center gap-[16px] pl-[66px] pt-[13px] pb-[23px] h-[72px] rounded-tr-[10px] text-[24px] text-border font-header2 transition";
+		"flex items-center gap-[16px] pl-[66px] pt-[13px] pb-[23px] h-[72px] rounded-tr-[10px] text-[24px] font-header2 transition";
 
 	// Dynamically build the links based on role
 	const renderLinks = (): JSX.Element[] => {
@@ -160,11 +160,13 @@ const DashboardSidebar: React.FC<{
 				<NavLink
 					key={to}
 					to={to}
-					end={to === "/dashboard"}
+					end={["/reports", "/settings", "/dashboard"].includes(to)}
 					className={({ isActive }) =>
 						[
 							baseLinkClasses,
-							isActive ? "bg-background-100" : "hover:bg-background-100/40",
+							isActive
+								? "bg-background-100 text-border"
+								: "hover:bg-background-100/40 text-white",
 						].join(" ")
 					}
 					onClick={onLinkClick}
@@ -185,11 +187,16 @@ const DashboardSidebar: React.FC<{
       `}
 		>
 			{/* Logo */}
-			<div className="flex items-center gap-[16px] h-[60px] px-[26px] mt-[38px]">
-				<img src={Logo} className="w-auto h-[56px]" alt="Spaces logo" />
-				<span className="text-[40px] text-text-100 font-header tracking-wide">
-					RMS
-				</span>
+			<div className="flex flex-col items-center h-[60px] px-6 mt-20 md:mt-10 gap-2">
+				{["Reporting and Incident", "Management"].map((text, index) => (
+					<span
+						key={index}
+						className="text-2xl text-[#ffcd00] font-header tracking-wide"
+					>
+						{text}
+					</span>
+				))}
+				<img src={Logo} className="h-20 w-auto" alt="Spaces Reporting Logo" />
 			</div>
 
 			{/* Main Links */}
@@ -202,12 +209,10 @@ const DashboardSidebar: React.FC<{
 				<div className="pb-6 space-y-2 justify-end">
 					<NavLink
 						to="/login"
-						className={({ isActive }) =>
-							[
-								baseLinkClasses,
-								isActive ? "bg-background-100" : "hover:bg-background-100/40",
-							].join(" ")
-						}
+						className={[
+							baseLinkClasses,
+							"hover:bg-background-100/40 text-white",
+						].join(" ")}
 						onClick={onLinkClick}
 					>
 						<LogoutCurve size={20} variant="Outline" />

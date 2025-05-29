@@ -59,7 +59,7 @@ const TasksProgressCard: React.FC<Props> = ({ className }) => {
 
 	return (
 		<Card1
-			header={"File types"}
+			header={"Document category"}
 			className={`pb-[30px] gap-4 ${className}`}
 			isStroked
 		>

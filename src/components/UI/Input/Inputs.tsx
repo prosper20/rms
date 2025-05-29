@@ -54,7 +54,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
 								additionalClasses
 									? additionalClasses +
 										"w-full outline-none text-[14px] font-light"
-									: `w-full rounded-[10px] border border-gray-200 focus:caret-primary-300 focus:border-primary-300 bg-transparent ${icon ? "px-12" : "px-4"} py-4 text-[14px] font-light  outline-none`
+									: `w-full rounded-[10px] border border-gray-200 focus:caret-primary-300 focus:border-primary-300 bg-transparent ${icon ? "px-12" : "px-4"} ${disabled ? "text-gray-600 font-normal" : ""} py-4 text-[14px] font-light  outline-none`
 							}`}
 							type={!visible ? type : "text"}
 							required={required}
