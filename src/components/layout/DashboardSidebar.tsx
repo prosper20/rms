@@ -8,6 +8,7 @@ import {
 	Add,
 	Setting2,
 	Home2,
+	Box,
 } from "iconsax-react";
 import Logo from "../../assets/Logo/logo.png";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
@@ -67,7 +68,7 @@ const DashboardSidebar: React.FC<{
 				links.push({
 					to: `/reports/${vendor.toLowerCase()}`,
 					label: vendor,
-					icon: DocumentText,
+					icon: Box,
 				});
 			});
 		}

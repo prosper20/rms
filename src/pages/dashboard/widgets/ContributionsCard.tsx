@@ -5,18 +5,22 @@ import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import { toast } from "sonner";
 import { getIconFromTag } from "../../../utils/utilities";
 
-interface Contribution {
+interface ReportFile {
 	id: string;
-	title: string;
-	description: string;
-	dueDate: string;
-	tag?: string;
-	status: "TODO" | "IN_PROGRESS" | "COMPLETED";
-	createdById: string;
-	groupId: string;
-	projectId?: string | null;
-	created_at: string;
-	updated_at: string;
+	name: string;
+	type: string;
+	size: number;
+	url: string;
+	sharedAt: string;
+	sharedBy: {
+		id: string;
+		fullName: string;
+		email: string;
+	};
+	vendor: {
+		id: string;
+		name: string;
+	};
 }
 
 interface Props {
@@ -24,17 +28,17 @@ interface Props {
 }
 
 const ContributionsCard: React.FC<Props> = ({ className }) => {
-	const [items, setItems] = useState<Contribution[]>([]);
+	const [items, setItems] = useState<ReportFile[]>([]);
 	const authHeader = useAuthHeader();
 
 	useEffect(() => {
-		const fetchContributions = async () => {
+		const fetchReports = async () => {
 			try {
 				const token = authHeader?.split(" ")[1];
 				if (!token) return;
 
 				const response = await fetch(
-					`${import.meta.env.VITE_API_URL}/tasks/contributions-week`,
+					`${import.meta.env.VITE_API_URL}/reports/weekly`,
 					{
 						headers: {
 							Authorization: `Bearer ${token}`,
@@ -43,23 +47,23 @@ const ContributionsCard: React.FC<Props> = ({ className }) => {
 				);
 
 				if (!response.ok) {
-					throw new Error("Failed to fetch contributions");
+					throw new Error("Failed to fetch reports");
 				}
 
 				const data = await response.json();
 				setItems(data || []);
 			} catch (error) {
 				console.error(error);
-				toast.error("Failed to load contributions");
+				toast.error("Failed to load reports");
 			}
 		};
 
-		fetchContributions();
+		fetchReports();
 	}, [authHeader]);
 
 	return (
 		<Card1
-			header={"Contributions"}
+			header={"Recent reports"}
 			className={`pb-[30px] ${className}`}
 			isStroked
 		>
@@ -70,7 +74,7 @@ const ContributionsCard: React.FC<Props> = ({ className }) => {
 			{items.length === 0 ? (
 				<div className="flex flex-col items-center justify-center py-10 text-center">
 					<p className="text-[20px] font-header2 text-gray-400 mb-4">
-						No contributions this week 🚀
+						No reports this week 🚀
 					</p>
 					<p className="text-[14px] text-gray-400">
 						Time to make some awesome progress!
@@ -81,25 +85,28 @@ const ContributionsCard: React.FC<Props> = ({ className }) => {
 				</div>
 			) : (
 				<ul className="px-6 py-4 space-y-3 text-sm">
-					{items.map((c) => {
-						const Icon = getIconFromTag(c.tag || "general");
+					{items.map((file) => {
+						const Icon = getIconFromTag(file.type); // Update your getIconFromTag to handle MIME types or extensions
 						return (
-							<React.Fragment key={c.id}>
+							<React.Fragment key={file.id}>
 								<li className="flex items-center gap-3">
 									<img
 										src={Icon}
 										className="w-[24px] h-[24px] mt-[2px]"
-										alt="Contribution Icon"
+										alt="File Icon"
 									/>
-									<p className="text-[12px] font-header2 text-text-100">
-										{c.title}
-									</p>
+									<a
+										href={`reports/${file.vendor.name.toLowerCase()}file?url=${encodeURIComponent(file.url)}}&id=${file.id}&vendor=${file.vendor.name}`}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="text-[12px] font-header2 text-text-100 underline hover:text-primary"
+									>
+										{file.name}
+									</a>
 								</li>
-								{c.description && (
-									<p className="font-header2 text-text-200 text-[12px] !mt-1 px-[24px]">
-										{c.description}
-									</p>
-								)}
+								<p className="font-header2 text-text-200 text-[12px] !mt-1 px-[24px]">
+									Shared by {file.sharedBy.fullName} from {file.vendor.name}
+								</p>
 							</React.Fragment>
 						);
 					})}

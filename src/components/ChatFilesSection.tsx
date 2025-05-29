@@ -80,7 +80,9 @@ const ChatFilesSection: React.FC<Props> = ({ fileData }) => {
 
 							<div className="flex-1">
 								<p className="text-[20px] md:text-[24px] hover:underline font-header3 text-gray-800">
-									<Link to={`file?url=${encodeURIComponent(file.url)}}`}>
+									<Link
+										to={`file?url=${encodeURIComponent(file.url)}}&id=${file.id}&vendor=${file.vendor.name}`}
+									>
 										{file.name}
 									</Link>
 								</p>
