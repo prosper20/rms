@@ -1,0 +1,164 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--rem: 10px;
+	font-size: var(--rem);
+}
+
+.active {
+	color: black;
+	border-bottom: 2px solid #27bba5;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+.btn-style-1 {
+	border-radius: 10px;
+	border: 2px solid #27bba5;
+	background:
+		linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.15) 0%,
+			rgba(255, 255, 255, 0) 100%,
+			rgba(255, 255, 255, 0) 100%
+		),
+		#27bba5;
+}
+
+@media only screen and (min-width: 768px) {
+	/* Your styles here */
+	.layout {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		grid-template-rows: auto 1fr;
+		height: 100dvh;
+	}
+}
+
+.sidebar {
+	grid-row: 1 /-1;
+}
+
+.join-community-btn {
+	border-radius: 10px;
+	border: 2px solid #d4f1ed;
+	background:
+		linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0.15) 0%,
+			rgba(255, 255, 255, 0) 100%,
+			rgba(255, 255, 255, 0) 100%
+		),
+		#d4f1ed;
+}
+
+@layer base {
+	body {
+		@apply font-sans bg-background-100 h-dvh;
+	}
+	.customContainer {
+		@apply max-w-screen-xxl mx-auto max-h-[948px];
+	}
+	.aside-container {
+		@apply rounded-2xl pt-6 px-8 pb-8 bg-gray-100 grid gap-10;
+	}
+}
+
+@layer components {
+	.link-styles {
+		@apply flex w-[100px] whitespace-nowrap md:w-auto pb-4 justify-center items-center gap-4 flex-shrink-0;
+	}
+
+	.links {
+		@apply flex w-full justify-between md:justify-normal md:gap-8 items-center text-[1.4rem] text-gray-500 leading-8;
+	}
+
+	.mobile-page-container {
+		@apply flex flex-col gap-8 pb-24 md:pb-8;
+	}
+
+	.community-container {
+		@apply grid lg:grid-cols-2 gap-x-[35px]  w-full h-full;
+	}
+}
+
+@layer utilities {
+	.bg-login {
+		background-image: url("./assets/authleftsideImage.png");
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+
+	.bg-login-mobile {
+		background-image: url("./assets/mobile-pattern-bg.png");
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+}
+
+.slider {
+	-webkit-appearance: none;
+	width: 100%;
+	height: 8px;
+	border-radius: 20px;
+	background: #449c3f;
+	outline: none;
+	-webkit-transition: 0.2s;
+}
+
+.slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 20px;
+	height: 20px;
+	background: #4dc247;
+	cursor: pointer;
+	border-radius: 50%;
+	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.05));
+}
+
+.slider::-moz-range-thumb {
+	width: 20px;
+	height: 20px;
+	background: #4dc247;
+	cursor: pointer;
+	border-radius: 50%;
+	filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.05));
+}
+
+.image-preview-container {
+	width: 100%;
+	overflow: hidden;
+	position: relative;
+}
+
+.image-preview {
+	width: 100%;
+	height: auto;
+	transform-origin: top left;
+	transition: transform 0.3s ease;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+	-webkit-appearance: none; /* Remove default styling (optional but often helpful) */
+	appearance: none;
+	display: none; /* This will hide the default button */
+}
+
+@media (max-width: 767px) {
+	.image-preview-container {
+		max-width: 90%;
+	}
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+	-webkit-transition: "color 9999s ease-out, background-color 9999s ease-out";
+	-webkit-transition-delay: 9999s;
+}
