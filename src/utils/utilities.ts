@@ -38,7 +38,6 @@ export function getIconFromTag(tag: string) {
 	return tagIcons[iconIndex];
 }
 
-
 export function formatText(role: string) {
 	return role.charAt(0).toUpperCase() + role.substring(1).toLowerCase();
 }
@@ -65,3 +64,18 @@ export const groupMessagesByDate = (messages: Message[]) => {
 	return groups;
 };
 
+export const getIconFromType = (type: string): string => {
+	const lower = type.toLowerCase();
+
+	if (lower.includes("pdf")) return "/icons/pdf.svg";
+	if (lower.includes("word") || lower.includes("doc")) return "/icons/doc.svg";
+	if (lower.includes("excel") || lower.includes("sheet"))
+		return "/icons/xlsx.svg";
+	if (lower.includes("powerpoint") || lower.includes("ppt"))
+		return "/icons/ppt.svg";
+	if (lower.includes("csv")) return "/icons/csv.svg";
+	if (lower.includes("image")) return "/icons/image.svg";
+
+	// default generic file icon
+	return "/icons/file.svg";
+};
