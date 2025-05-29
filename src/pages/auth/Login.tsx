@@ -63,20 +63,25 @@ const LoginForm = () => {
 						fullName: response.fullName,
 						email: response.email,
 						vendor: response.vendor,
+						isProfileComplete: response.isProfileComplete,
 						vendorId: response.vendorId,
 						role: response.role,
 					},
 				});
 				toast.success("Login Successful");
 				reset();
-				if (response.role === "SUPER_USER") {
-					navigate("/reports");
-				} else if (response.role === "ADMIN") {
-					navigate("/settings");
-				} else if (response.vendor) {
-					navigate(`/reports/${response.vendor.toLowerCase()}`);
+				if (!response.isProfileComplete) {
+					navigate("/reset");
 				} else {
-					navigate("/");
+					if (response.role === "SUPER_USER") {
+						navigate("/reports");
+					} else if (response.role === "ADMIN") {
+						navigate("/settings");
+					} else if (response.vendor) {
+						navigate(`/reports/${response.vendor.toLowerCase()}`);
+					} else {
+						navigate("/");
+					}
 				}
 			}
 		},
@@ -107,7 +112,9 @@ const LoginForm = () => {
 					{" "}
 					{/* Added pt-8 for more top space */}
 					{/* <img src={Logo} alt="Logo" className="w-auto h-[48px]" /> */}
-					<h1 className="text-3xl font-semibold">Report Management System</h1>
+					<h1 className="text-3xl font-semibold">
+						REPORTING AND INCIDENT MANAGEMENT SYSTEM
+					</h1>
 				</div>
 				<div className="flex flex-1 flex-col justify-center min-h-full">
 					<h1 className="text-4xl font-bold text-text-100 mb-8">Log In</h1>
