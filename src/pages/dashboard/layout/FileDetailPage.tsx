@@ -43,7 +43,12 @@ const FileDetailPage = () => {
 					}
 				);
 
-				setDocument(response.data);
+				const doc = {
+					name: response.data.name,
+					url: `${import.meta.env.VITE_S3_DOMAIN}/${response.data.url}`,
+				};
+
+				setDocument(doc);
 			} catch (err) {
 				console.error("Error fetching files:", err);
 				setError("Failed to load document");

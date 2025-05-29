@@ -96,7 +96,7 @@ const ContributionsCard: React.FC<Props> = ({ className }) => {
 										alt="File Icon"
 									/>
 									<a
-										href={`reports/${file.vendor.name.toLowerCase()}file?url=${encodeURIComponent(file.url)}}&id=${file.id}&vendor=${file.vendor.name}`}
+										href={`reports/${file.vendor.name.toLowerCase()}file?url=${encodeURIComponent(`${import.meta.env.VITE_S3_DOMAIN}/${file.url}`)}}&id=${file.id}&vendor=${file.vendor.name}`}
 										target="_blank"
 										rel="noopener noreferrer"
 										className="text-[12px] font-header2 text-text-100 underline hover:text-primary"

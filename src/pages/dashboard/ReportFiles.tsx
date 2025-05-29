@@ -61,7 +61,7 @@ const ReportFiles: React.FC<ReportFilesProps> = ({ vendorSlug }) => {
 				const transformed: FileItem[] = response.data.map((file: any) => ({
 					id: file.id,
 					name: file.name,
-					url: file.url,
+					url: `${import.meta.env.VITE_S3_DOMAIN}/${file.url}`,
 					sharedBy: file.sharedBy.fullName,
 					sharedOn: new Date(file.sharedAt).toLocaleDateString("en-US", {
 						month: "short",
