@@ -3,15 +3,37 @@ import axios from "axios";
 import ProfileInfo from "../../components/SettingsComponent/ProfileInfo";
 import AccountSettings from "../../components/SettingsComponent/AccountSettings";
 
+type Vendor = {
+	id: string;
+	name: string;
+	created_at: string;
+	updated_at: string;
+	users: {
+		id: string;
+		fullName: string;
+		email: string;
+	}[];
+	files: any[];
+};
+
+type UserFormFields = {
+	fullName: string;
+	email: string;
+	password: string;
+	vendorId: string;
+	role: "ADMIN" | "SUPER_USER" | "VENDOR";
+};
+
 const SettingsPage = () => {
-	const [vendors, setVendors] = useState([]);
-	const [userForm, setUserForm] = useState({
+	const [vendors, setVendors] = useState<Vendor[]>([]);
+	const [userForm, setUserForm] = useState<UserFormFields>({
 		fullName: "",
 		email: "",
 		password: "",
 		vendorId: "",
 		role: "ADMIN",
 	});
+
 	const [vendorName, setVendorName] = useState("");
 
 	useEffect(() => {
@@ -23,7 +45,9 @@ const SettingsPage = () => {
 			.catch((err) => console.error(err));
 	}, []);
 
-	const handleUserInputChange = (e) => {
+	const handleUserInputChange = (
+		e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => {
 		const { name, value } = e.target;
 		setUserForm((prev) => ({ ...prev, [name]: value }));
 	};

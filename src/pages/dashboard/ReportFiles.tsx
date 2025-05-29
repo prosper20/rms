@@ -59,6 +59,7 @@ const ReportFiles: React.FC<ReportFilesProps> = ({ vendorSlug }) => {
 				);
 
 				const transformed: FileItem[] = response.data.map((file: any) => ({
+					id: file.id,
 					name: file.name,
 					url: file.url,
 					sharedBy: file.sharedBy.fullName,
@@ -67,6 +68,10 @@ const ReportFiles: React.FC<ReportFilesProps> = ({ vendorSlug }) => {
 						day: "numeric",
 						year: "numeric",
 					}),
+					vendor: {
+						id: file.vendor?.id || "",
+						name: file.vendor?.name || "Unknown Vendor",
+					},
 					type: getFileExtension(file.type),
 				}));
 

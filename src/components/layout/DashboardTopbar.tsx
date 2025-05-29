@@ -1,34 +1,14 @@
-// src/components/layout/DashboardTopbar.tsx
-import React, { useState } from "react";
-import { Menu, Search, Bell } from "lucide-react";
-import useAuthUser from "react-auth-kit/hooks/useAuthUser";
-
-// import userAvatar from "../../assets/user-images/default-avatar-photo.jpg";
-// import { Shadow2 } from "../UI/Input/Shadows";
-// import { Link } from "react-router-dom";
+import React from "react";
+import { Menu } from "lucide-react";
 import SearchFiles from "../SearchFiles";
 
-/* Props ------------------------------------------------------------------ */
 interface DashboardTopbarProps {
-	/** Opens the mobile sidebar drawer */
 	onHamburgerClick: () => void;
 }
 
 const DashboardTopbar: React.FC<DashboardTopbarProps> = ({
 	onHamburgerClick,
 }) => {
-	const authUser: {
-		id: string;
-		fullName: string;
-		email: string;
-		profilePicture: string;
-	} | null = useAuthUser();
-
-	const [searchTerm, setSearchTerm] = useState<string>("");
-
-	function handleClearSearch() {
-		setSearchTerm("");
-	}
 	return (
 		<header
 			className="
