@@ -76,15 +76,15 @@ const ResetPassword = () => {
 	};
 
 	return (
-		<div className="h-screen bg-white md:bg-[#F5F0EB] flex flex-col md:flex-row overflow-hidden">
+		<div className="h-screen bg-[#F5F0EB] flex flex-col md:flex-row overflow-hidden">
 			{/* Left: Form Section */}
 			<div className="relative w-full md:w-1/2 flex flex-1 items-center justify-center p-6 md:p-12">
 				{/* Heading */}
-				<div className="absolute w-full max-w-[50rem] top-[15%] left-1/2 transform -translate-x-1/2 z-10 text-center px-8">
+				{/* <div className="absolute w-full max-w-[50rem] top-[15%] left-1/2 transform -translate-x-1/2 z-10 text-center px-8">
 					<h1 className="text-4xl md:text-4xl font-bold text-gray-700">
 						Protect Your Information
 					</h1>
-				</div>
+				</div> */}
 
 				{/* Form Card */}
 				<div className="w-full max-w-2xl bg-white rounded-lg shadow-md px-10 py-16 z-0">

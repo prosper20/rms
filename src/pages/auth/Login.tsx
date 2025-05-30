@@ -130,8 +130,7 @@ const LoginForm = () => {
 							)}
 						</div>
 
-						<div className="text-md text-gray-700">
-							If you encounter any errors{" "}
+						<div className="text-md text-right text-gray-700">
 							<a
 								href="mailto:pentagontechteam@gmail.com"
 								className="text-[#007f5f] underline"
