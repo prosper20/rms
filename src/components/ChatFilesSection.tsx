@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Download } from "lucide-react";
-import { FileItem } from "../pages/dashboard/ReportFiles";
 
 import pdfIcon from "/icons/pdf.png";
 import csvIcon from "/icons/csv.png";
 import wordIcon from "/icons/word.png";
 import excelIcon from "/icons/excel.webp";
 import pptIcon from "/icons/powerpoint.png";
+import { FileItem } from "../types/File";
 
 interface Props {
 	fileData: FileItem[];
@@ -76,7 +76,7 @@ const ChatFilesSection: React.FC<Props> = ({ fileData }) => {
 									: ""
 							} flex items-center space-x-3`}
 						>
-							<div className="flex-shrink-0">{getFileIcon(file.type)}</div>
+							<div className="flex-shrink-0 pr-4">{getFileIcon(file.type)}</div>
 
 							<div className="flex-1">
 								<p className="text-[20px] md:text-[24px] hover:underline font-header3 text-gray-800">
@@ -95,11 +95,9 @@ const ChatFilesSection: React.FC<Props> = ({ fileData }) => {
 								</p>
 							</div>
 
-							{/* Download icon at the right end */}
 							<a
 								href={file.url}
 								download
-								target="_blank"
 								rel="noopener noreferrer"
 								className="ml-auto font-semibold text-gray-500 hover:text-green-600"
 							>
