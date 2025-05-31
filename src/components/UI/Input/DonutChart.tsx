@@ -19,8 +19,8 @@ const DonutChart: React.FC<DonutChartProps> = ({
 	const circumference = 2 * Math.PI * normalizedRadius;
 
 	const segments = [
-		{ label: "Completed", value: completed, color: "#18320C" },
 		{ label: "In progress", value: inProgress, color: "#CDBF2C" },
+		{ label: "Completed", value: completed, color: "#18320C" },
 		{ label: "Not started", value: notStarted, color: "#E5E5E5" },
 	];
 

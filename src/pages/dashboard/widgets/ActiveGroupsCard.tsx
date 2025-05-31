@@ -86,7 +86,7 @@ const ActiveGroupsCard: React.FC<Props> = ({ className, header }) => {
 								<div className="flex items-center gap-[6px]">
 									<DocumentText className="w-6 h-6" />
 									<p className="text-[14px]">
-										{v.files} {v.files === 1 ? "file" : "files"}
+										{v.files} {v.files <= 1 ? "file" : "files"}
 									</p>
 								</div>
 							</div>
