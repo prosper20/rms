@@ -59,7 +59,7 @@ const TasksProgressCard: React.FC<Props> = ({ className }) => {
 
 	return (
 		<Card1
-			header={"File types"}
+			header={"File Insights"}
 			className={`pb-[30px] gap-4 ${className}`}
 			isStroked
 		>
@@ -72,9 +72,9 @@ const TasksProgressCard: React.FC<Props> = ({ className }) => {
 
 			{/* Legend */}
 			<div className="mt-1 flex items-center gap-[8px] text-[14px] font-header2 justify-center">
-				<LegendDot color="#E5E5E5" label="Other" />
 				<LegendDot color="#CDBF2C" label="Word" />
 				<LegendDot color="#18320C" label="PDF" />
+				<LegendDot color="#E5E5E5" label="Other" />
 			</div>
 		</Card1>
 	);

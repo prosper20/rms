@@ -3,7 +3,7 @@ import { CircleOff } from "lucide-react";
 import Card1 from "../../../components/UI/Input/Card1";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import { toast } from "sonner";
-import { getIconFromTag } from "../../../utils/utilities";
+import { getIconFromType } from "../../../utils/utilities";
 
 interface ReportFile {
 	id: string;
@@ -38,7 +38,7 @@ const ContributionsCard: React.FC<Props> = ({ className }) => {
 				if (!token) return;
 
 				const response = await fetch(
-					`${import.meta.env.VITE_API_URL}/reports/weekly`,
+					`${import.meta.env.VITE_API_URL}/reports/daily`,
 					{
 						headers: {
 							Authorization: `Bearer ${token}`,
@@ -68,13 +68,13 @@ const ContributionsCard: React.FC<Props> = ({ className }) => {
 			isStroked
 		>
 			<h1 className="font-header2 text-text-200 text-[16px] px-[16px] mt-1">
-				This week
+				Today
 			</h1>
 
 			{items.length === 0 ? (
 				<div className="flex flex-col items-center justify-center py-10 text-center">
 					<p className="text-[20px] font-header2 text-gray-400 mb-4">
-						No reports this week 🚀
+						No reports this today 🚀
 					</p>
 					<p className="text-[14px] text-gray-400">
 						Time to make some awesome progress!
@@ -86,28 +86,46 @@ const ContributionsCard: React.FC<Props> = ({ className }) => {
 			) : (
 				<ul className="px-6 py-4 space-y-3 text-sm">
 					{items.map((file) => {
-						const Icon = getIconFromTag(file.type); // Update your getIconFromTag to handle MIME types or extensions
+						const Icon = getIconFromType(file.type);
+						const fileUrl = `${import.meta.env.VITE_S3_DOMAIN}/${file.url}`;
+						const fileLink = `reports/${file.vendor.name.toLowerCase()}/file?url=${encodeURIComponent(
+							fileUrl
+						)}&id=${file.id}&vendor=${file.vendor.name}`;
+
 						return (
-							<React.Fragment key={file.id}>
-								<li className="flex items-center gap-3">
-									<img
-										src={Icon}
-										className="w-[24px] h-[24px] mt-[2px]"
-										alt="File Icon"
-									/>
-									<a
-										href={`reports/${file.vendor.name.toLowerCase()}file?url=${encodeURIComponent(file.url)}}&id=${file.id}&vendor=${file.vendor.name}`}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="text-[12px] font-header2 text-text-100 underline hover:text-primary"
-									>
-										{file.name}
-									</a>
-								</li>
-								<p className="font-header2 text-text-200 text-[12px] !mt-1 px-[24px]">
-									Shared by {file.sharedBy.fullName} from {file.vendor.name}
-								</p>
-							</React.Fragment>
+							<li key={file.id}>
+								<a
+									href={fileLink}
+									rel="noopener noreferrer"
+									className="hover:bg-gray-200 flex items-center gap-4 bg-background-100/10 rounded-xl p-3"
+								>
+									<div className="flex-shrink-0 bg-white p-2 rounded-md">
+										<img
+											src={Icon}
+											alt={`${file.type} icon`}
+											className="w-16 h-16"
+										/>
+									</div>
+
+									<div className="flex flex-col">
+										<a
+											href={fileLink}
+											rel="noopener noreferrer"
+											className="text-xl font-header2 text-text-100 underline hover:text-primary"
+										>
+											{file.name}
+										</a>
+										<p className="text-lg text-text-200 mt-1">
+											Shared by{" "}
+											<span className="font-semibold">
+												{file.sharedBy.fullName}
+											</span>{" "}
+											from{" "}
+											<span className="font-semibold">{file.vendor.name}</span>
+										</p>
+									</div>
+								</a>
+							</li>
 						);
 					})}
 				</ul>

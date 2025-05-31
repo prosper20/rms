@@ -6,6 +6,7 @@ import {
 import { lazy, Suspense } from "react";
 
 import Login from "./pages/auth/Login";
+import ResetPassword from "./pages/auth/ResetPassword";
 import GlobalLayout from "./components/layout/GlobalLayout";
 import ReportLayout from "./components/UI/Layout.tsx";
 import FileDetailPage from "./pages/dashboard/layout/FileDetailPage.tsx";
@@ -139,150 +140,11 @@ const router = createBrowserRouter([
 		path: "/login",
 		element: <Login />,
 	},
+	{
+		path: "/reset",
+		element: <ResetPassword />,
+	},
 ]);
-
-// const router = createBrowserRouter([
-// 	{
-// 		element: (
-// 			// <RequireAuth>
-// 			<GlobalLayout />
-// 			// </RequireAuth>
-// 		),
-
-// 		children: [
-// 			{
-// 				path: "/reports",
-// 				element: <ReportLayout />,
-// 				children: [
-// 					{
-// 						index: true,
-// 						element: (
-// 							<Suspense fallback={null}>
-// 								<ReportFiles />
-// 							</Suspense>
-// 						),
-// 					},
-// 				],
-// 			},
-// 			{
-// 				path: "/tfml",
-// 				element: <ReportLayout />,
-// 				children: [
-// 					{
-// 						index: true,
-// 						element: (
-// 							<Suspense fallback={null}>
-// 								<ReportFiles />
-// 							</Suspense>
-// 						),
-// 					},
-// 					{
-// 						path: "file",
-// 						element: (
-// 							<Suspense fallback={null}>
-// 								<FileDetailPage />
-// 								{/* <GroupInfoPage /> */}
-// 							</Suspense>
-// 						),
-// 					},
-// 				],
-// 			},
-// 			{
-// 				path: "/pentagon",
-// 				element: <ReportLayout />,
-// 				children: [
-// 					{
-// 						index: true,
-// 						element: (
-// 							<Suspense fallback={null}>
-// 								<ReportFiles />
-// 							</Suspense>
-// 						),
-// 					},
-// 					{
-// 						path: "file",
-// 						element: (
-// 							<Suspense fallback={null}>
-// 								<FileDetailPage />
-// 								{/* <GroupInfoPage /> */}
-// 							</Suspense>
-// 						),
-// 					},
-// 				],
-// 			},
-// 			{
-// 				path: "/tsebo",
-// 				element: <ReportLayout />,
-// 				children: [
-// 					{
-// 						index: true,
-// 						element: (
-// 							<Suspense fallback={null}>
-// 								<ReportFiles />
-// 							</Suspense>
-// 						),
-// 					},
-// 					{
-// 						path: "file",
-// 						element: (
-// 							<Suspense fallback={null}>
-// 								<FileDetailPage />
-// 								{/* <GroupInfoPage /> */}
-// 							</Suspense>
-// 						),
-// 					},
-// 				],
-// 			},
-// 			{
-// 				path: "/nairda",
-// 				element: <ReportLayout />,
-// 				children: [
-// 					{
-// 						index: true,
-// 						element: (
-// 							<Suspense fallback={null}>
-// 								<ReportFiles />
-// 							</Suspense>
-// 						),
-// 					},
-// 					{
-// 						path: "file",
-// 						element: (
-// 							<Suspense fallback={null}>
-// 								<FileDetailPage />
-// 								{/* <GroupInfoPage /> */}
-// 							</Suspense>
-// 						),
-// 					},
-// 				],
-// 			},
-// 			{
-// 				path: "/settings",
-// 				element: (
-// 					<Suspense fallback={null}>
-// 						<SettingsPage />
-// 					</Suspense>
-// 				),
-// 			},
-
-// 			/* Redirect bare slash → /reports */
-// 			{
-// 				path: "/",
-// 				element: <Navigate to="/reports" replace />,
-// 			},
-// 		],
-// 	},
-
-// 	// ▸ 404  ────────────────────────────────────────────────────────
-// 	{
-// 		path: "*",
-// 		element: <h1 className="p-8 text-center text-2xl">404 – Page not found</h1>,
-// 	},
-// 	{
-// 		path: "/login",
-// 		element: <Login />,
-// 	},
-// ]);
 
 const App = () => {
 	return <RouterProvider router={router} />;

@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { Message } from "../types/Message";
+import { FileItem } from "../types/File";
 
 const colors = ["#C5BD1B", "#B28B50", "#9747FF", "#E43A6E"];
 
@@ -66,16 +67,31 @@ export const groupMessagesByDate = (messages: Message[]) => {
 
 export const getIconFromType = (type: string): string => {
 	const lower = type.toLowerCase();
+	console.log("the extension: ", lower);
 
-	if (lower.includes("pdf")) return "/icons/pdf.svg";
-	if (lower.includes("word") || lower.includes("doc")) return "/icons/doc.svg";
+	if (lower.includes("pdf")) return "/file-icons/PDF.svg";
+	if (lower.includes("docx")) return "/file-icons/DOCX.svg";
+	if (lower.includes("doc")) return "/file-icons/DOC.svg";
+	if (lower.includes("word")) return "/file-icons/DOCX.svg";
 	if (lower.includes("excel") || lower.includes("sheet"))
-		return "/icons/xlsx.svg";
+		return "/file-icons/XLS.svg";
 	if (lower.includes("powerpoint") || lower.includes("ppt"))
-		return "/icons/ppt.svg";
-	if (lower.includes("csv")) return "/icons/csv.svg";
-	if (lower.includes("image")) return "/icons/image.svg";
+		return "/file-icons/PPT.svg";
+	if (lower.includes("csv")) return "/file-icons/CSV.svg";
+	if (lower.includes("png")) return "/file-icons/PNG.svg";
+	if (lower.includes("svg")) return "/file-icons/SVG.svg";
+	if (lower.includes("jpg") || lower.includes("jpeg"))
+		return "/file-icons/JPG.svg";
 
 	// default generic file icon
 	return "/icons/file.svg";
+};
+
+export const getFileExtension = (mime: string): FileItem["type"] => {
+	if (mime.includes("spreadsheetml")) return "xlsx";
+	if (mime.includes("csv")) return "csv";
+	if (mime.includes("wordprocessingml")) return "docx";
+	if (mime.includes("pdf")) return "pdf";
+	if (mime.includes("presentationml")) return "pptx";
+	return "pdf";
 };
