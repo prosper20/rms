@@ -82,11 +82,17 @@ const LoginForm = () => {
 			{/* Left: Form Section */}
 			<div className="relative w-full md:w-1/2 flex flex-1 items-center justify-center p-6 md:p-12">
 				{/* Absolute heading in left section */}
-				<div className="absolute w-full max-w-[50rem] top-[15%] left-1/2 transform -translate-x-1/2 z-10 text-center px-8">
+				<div className="absolute w-full max-w-[50rem] top-[15%] left-1/2 transform -translate-x-1/2 z-10 text-center px-8 short:hidden">
 					<h1 className="text-4xl md:text-4xl font-bold text-gray-700">
 						Reporting and Incident Management System
 					</h1>
 				</div>
+
+				{/* <div className="absolute w-full max-w-[50rem] top-[15%] left-1/2 transform -translate-x-1/2 z-10 text-center px-8">
+					<h1 className="text-4xl md:text-4xl font-bold text-gray-700">
+						Reporting and Incident Management System
+					</h1>
+				</div> */}
 
 				{/* Login Form Card */}
 				<div className="w-full max-w-2xl bg-white rounded-lg shadow-md px-10 py-16 z-0">
@@ -151,7 +157,7 @@ const LoginForm = () => {
 			</div>
 
 			{/* Right: Image Section */}
-			<div className="hidden md:block w-full md:w-1/2 h-full">
+			<div className="hidden lg:block w-full md:w-1/2 h-full">
 				<img
 					src="/images/tower-croped.png"
 					alt="Background Visual"

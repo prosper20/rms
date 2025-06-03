@@ -19,6 +19,7 @@ export default {
 			"max-sw": { max: "500px" },
 			"max-pd": { max: "830px" },
 			"max-bw": { max: "360px" },
+			short: { raw: "(max-height: 500px)" },
 		},
 		boxShadow: {
 			"box-shadow1": "4px 4px 10px 0px #D8C4AA",
