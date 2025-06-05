@@ -195,6 +195,7 @@ const SettingsPage = () => {
 export default SettingsPage;
 
 // import ProfileInfo from "../../components/SettingsComponent/ProfileInfo";
+
 // import AccountSettings from "../../components/SettingsComponent/AccountSettings";
 // import NotificationSetting from "../../components/SettingsComponent/NotificationSetting";
 
