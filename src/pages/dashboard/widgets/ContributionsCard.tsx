@@ -74,10 +74,10 @@ const ContributionsCard: React.FC<Props> = ({ className }) => {
 			{items.length === 0 ? (
 				<div className="flex flex-col items-center justify-center py-10 text-center">
 					<p className="text-[20px] font-header2 text-gray-400 mb-4">
-						No reports this today 🚀
+						No reports for today
 					</p>
 					<p className="text-[14px] text-gray-400">
-						Time to make some awesome progress!
+						Nothing to review at the moment.
 					</p>
 					<div className="w-[80px] h-[80px] rounded-full bg-gray-100 flex items-center justify-center mt-6">
 						<CircleOff size={40} strokeWidth={1} className="text-[#747373]" />

@@ -20,12 +20,12 @@ const SearchFiles: React.FC = () => {
 	}
 
 	return (
-		<div className="w-[90%] bg-background-primary rounded-[24px] items-center flex px-[24px] py-[10px] gap-[25px]  border border-border/[72%]">
+		<div className="w-[90%] bg-background-primary rounded-[24px] items-center flex px-[18px] py-[8px] md:px-[24px] md:py-[10px] gap-[25px]  border border-border/[72%]">
 			<Search size={30} strokeWidth={3} color="#5c4033" />
 			<input
 				onChange={(e) => handleOnChange(e)}
 				value={fileSearch}
-				className="w-full bg-transparent font-header2 outline-none text-[24px] text-text-100 placeholder:text-text-100/[77%] placeholder:italic"
+				className="w-full bg-transparent font-header2 outline-none text-[18px] md:text-[24px] text-text-100 placeholder:text-text-100/[77%] placeholder:italic"
 				type="text"
 				placeholder="Search files"
 			/>

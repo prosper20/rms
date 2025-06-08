@@ -65,7 +65,7 @@ const ActiveGroupsCard: React.FC<Props> = ({ className, header }) => {
 				setVendors(formattedVendors);
 			} catch (error) {
 				console.error(error);
-				toast.error("Failed to load active groups");
+				toast.error("Failed to load active vendors");
 			}
 		};
 
