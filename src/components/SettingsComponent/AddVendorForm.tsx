@@ -1,45 +1,58 @@
 import React, { useState } from "react";
 import axios from "axios";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
+import { toast } from "sonner";
+import LoaderSpinnerSmall from "../Loaders/LoaderSpinnerSmall";
 
 const AddVendorForm: React.FC = () => {
 	const [vendorName, setVendorName] = useState("");
-	const [, setVendors] = useState<any[]>([]); // Optional if you want to keep track
+	//const [, setVendors] = useState<any[]>([]); // Optional
+	const [loading, setLoading] = useState(false);
 
-	const fetchVendors = async () => {
-		try {
-			const res = await axios.get(import.meta.env.VITE_API_URL + "/vendors", {
-				withCredentials: true,
-			});
-			setVendors(res.data);
-		} catch (err) {
-			console.error("Failed to fetch vendors", err);
-		}
-	};
+	const authHeader = useAuthHeader();
+	const token = authHeader?.split(" ")[1];
+
+	// const fetchVendors = async () => {
+	// 	try {
+	// 		const res = await axios.get(`${import.meta.env.VITE_API_URL}/vendors`, {
+	// 			headers: { Authorization: `Bearer ${token}` },
+	// 		});
+	// 		setVendors(res.data);
+	// 	} catch (err) {
+	// 		console.error("Failed to fetch vendors", err);
+	// 		toast.error("Failed to fetch vendors");
+	// 	}
+	// };
 
 	const handleAddVendor = async () => {
 		if (!vendorName.trim()) {
-			alert("Vendor name cannot be empty");
+			toast.error("Vendor name cannot be empty");
 			return;
 		}
+
+		setLoading(true);
 		try {
 			await axios.post(
-				import.meta.env.VITE_API_URL + "/vendors",
+				`${import.meta.env.VITE_API_URL}/vendors`,
 				{ name: vendorName },
-				{ withCredentials: true }
+				{
+					headers: { Authorization: `Bearer ${token}` },
+				}
 			);
-			alert("Vendor added successfully");
+			toast.success("Vendor added successfully");
 			setVendorName("");
-			await fetchVendors(); // Refresh vendors list after adding
+			// await fetchVendors();
 		} catch (err) {
 			console.error(err);
-			alert("Failed to add vendor");
+			toast.error("Failed to add vendor");
+		} finally {
+			setLoading(false);
 		}
 	};
 
-	// Optionally fetch vendors on mount if you want to show the list or use it
-	React.useEffect(() => {
-		fetchVendors();
-	}, []);
+	// useEffect(() => {
+	// 	fetchVendors();
+	// }, []);
 
 	return (
 		<section className="bg-settings/[40%] shadow-profile-info rounded-tr-[15px] px-6 py-8">
@@ -56,17 +69,12 @@ const AddVendorForm: React.FC = () => {
 				/>
 				<button
 					onClick={handleAddVendor}
-					className="bg-primary-button-100 text-white px-6 py-2 rounded-[5px] text-[16px]"
+					className="bg-primary-button-100 text-white px-6 py-2 rounded-[5px] text-[16px] flex items-center justify-center min-w-[140px]"
+					disabled={loading}
 				>
-					Add Vendor
+					{loading ? <LoaderSpinnerSmall /> : "Add Vendor"}
 				</button>
 			</div>
-			{/* Optional: Display vendors if you want */}
-			{/* <ul>
-        {vendors.map((v) => (
-          <li key={v.id}>{v.name}</li>
-        ))}
-      </ul> */}
 		</section>
 	);
 };

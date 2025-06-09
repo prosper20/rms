@@ -51,13 +51,24 @@ const ReportFiles = ({ vendorSlug }: { vendorSlug: string }) => {
 		: files;
 
 	return (
-		<div className="w-full flex justify-center p-4 md:p-9 overflow-y-auto h-full">
-			{isLoading ? (
-				<RotatingLinesSpinner strokeColor="gray" width="24" />
-			) : (
-				<ChatFilesSection fileData={filteredFiles} />
-			)}
+		<div className=" mx-4 md:mx-8 lg:mx-[3%] md:py-6 lg:pt-[21px] xl:pb-[10px]">
+			<div className="w-full flex justify-center overflow-y-auto h-full">
+				{isLoading ? (
+					<RotatingLinesSpinner strokeColor="gray" width="24" />
+				) : (
+					<ChatFilesSection fileData={filteredFiles} />
+				)}
+			</div>
 		</div>
+		// <div className="w-full flex justify-center items-center overflow-y-auto h-full">
+		// 	{isLoading ? (
+		// 		<div className="h-screen w-full flex flex-col flex-grow justify-center items-center">
+		// 			<RotatingLinesSpinner strokeColor="gray" width="24" />
+		// 		</div>
+		// 	) : (
+		// 		<ChatFilesSection fileData={filteredFiles} />
+		// 	)}
+		// </div>
 	);
 };
 

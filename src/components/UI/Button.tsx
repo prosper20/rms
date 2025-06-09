@@ -10,7 +10,7 @@ const variantStyles = {
 	primary:
 		"border border-[#0b7570] rounded-[10px] text-white bg-[#0b7570] hover:bg-[#0e8c86] hover:border-[#0e8c86]",
 	danger:
-		"border border-accountset rounded-[3px] text-accountset bg-transparent hover:bg-accountset hover:text-white",
+		"border border-accountset rounded-[10px] text-accountset bg-transparent hover:bg-accountset hover:text-white",
 	outline:
 		"border border-[#fecd01] rounded-[10px] bg-transparent hover:bg-[#fecd01] ",
 };
@@ -26,12 +26,14 @@ export const Button: React.FC<ButtonProps> = ({
 	variant = "primary",
 	size = "md",
 	className = "",
+	disabled,
 	...props
 }) => {
 	return (
 		<button
 			{...props}
-			className={` ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+			disabled={disabled}
+			className={` ${variantStyles[variant]} ${sizeStyles[size]} ${className} disabled:opacity-50 disabled:cursor-not-allowed`}
 		>
 			{children}
 		</button>
