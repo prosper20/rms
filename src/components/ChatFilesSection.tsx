@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Download } from "lucide-react";
+import { MoreVertical } from "lucide-react";
 
 import pdfIcon from "/icons/pdf.png";
 import csvIcon from "/icons/csv.png";
@@ -14,6 +14,12 @@ interface Props {
 }
 
 const ChatFilesSection: React.FC<Props> = ({ fileData }) => {
+	const [openMenuIndex, setOpenMenuIndex] = useState<number | null>(null);
+
+	const toggleMenu = (index: number) => {
+		setOpenMenuIndex(openMenuIndex === index ? null : index);
+	};
+
 	const getFileIcon = (type: FileItem["type"]) => {
 		const commonClass = "h-8 w-8 md:h-10 md:w-10";
 		switch (type) {
@@ -33,13 +39,13 @@ const ChatFilesSection: React.FC<Props> = ({ fileData }) => {
 	};
 
 	return (
-		<div className=" py-4 md:py-6 rounded-2xl w-full">
+		<div className="py-4 md:py-6 rounded-2xl w-full">
 			{fileData.length > 0 ? (
 				<ul>
 					{fileData.map((file, index) => (
 						<li
 							key={index}
-							className="hover:bg-background-primary flex items-center gap-3 px-4 py-3 sm:px-6 sm:py-4 border-b last:border-none border-border/30"
+							className="hover:bg-background-primary flex items-center gap-3 px-4 py-3 sm:px-6 sm:py-4 border-b last:border-none border-border/30 relative"
 						>
 							{/* Icon */}
 							<div className="flex-shrink-0">{getFileIcon(file.type)}</div>
@@ -48,7 +54,7 @@ const ChatFilesSection: React.FC<Props> = ({ fileData }) => {
 							<div className="flex-1 min-w-0">
 								<Link
 									to={`file?url=${encodeURIComponent(file.url)}&id=${file.id}&vendor=${file.vendor.name}`}
-									className="block font-medium text-[16px] text-gray-800 "
+									className="block font-medium text-[16px] text-gray-800"
 								>
 									{file.name}
 								</Link>
@@ -58,15 +64,47 @@ const ChatFilesSection: React.FC<Props> = ({ fileData }) => {
 								</p>
 							</div>
 
-							{/* Download Button */}
-							<a
-								href={file.url}
-								download
-								rel="noopener noreferrer"
-								className="ml-auto text-gray-400 hover:text-green-600"
-							>
-								<Download className="w-6 h-6 md:w-7 md:h-7" />
-							</a>
+							{/* Three Dots Menu */}
+							<div className="relative ml-auto">
+								<button
+									onClick={() => toggleMenu(index)}
+									className="text-gray-500 hover:text-gray-700"
+								>
+									<MoreVertical className="w-6 h-6" />
+								</button>
+
+								{openMenuIndex === index && (
+									<div className="absolute right-0 mt-2 w-36 bg-white border border-gray-200 rounded shadow-lg z-10">
+										<ul className="text-[14px] text-gray-700">
+											<li>
+												<a
+													href={file.url}
+													download
+													className="block px-4 py-2 hover:bg-gray-100"
+												>
+													Download
+												</a>
+											</li>
+											<li>
+												<button
+													className="w-full text-left px-4 py-2 hover:bg-gray-100"
+													onClick={() => console.log("Delete", file.id)}
+												>
+													Delete
+												</button>
+											</li>
+											<li>
+												<button
+													className="w-full text-left px-4 py-2 hover:bg-gray-100"
+													onClick={() => console.log("Share", file.id)}
+												>
+													Share
+												</button>
+											</li>
+										</ul>
+									</div>
+								)}
+							</div>
 						</li>
 					))}
 				</ul>
@@ -76,53 +114,136 @@ const ChatFilesSection: React.FC<Props> = ({ fileData }) => {
 				</div>
 			)}
 		</div>
-		// <div className="bg-background-primary py-4 md:py-6 rounded-2xl w-full border border-border/30">
-		// 	{fileData.length > 0 ? (
-		// 		<ul>
-		// 			{fileData.map((file, index) => (
-		// 				<li
-		// 					key={index}
-		// 					className="flex items-center gap-3 px-4 py-3 sm:px-6 sm:py-4 border-b last:border-none border-border/30"
-		// 				>
-		// 					{/* Icon */}
-		// 					<div className="flex-shrink-0">{getFileIcon(file.type)}</div>
-
-		// 					{/* File Info */}
-		// 					<div className="flex-1 min-w-0">
-		// 						<Link
-		// 							to={`file?url=${encodeURIComponent(file.url)}&id=${file.id}&vendor=${file.vendor.name}`}
-		// 							className="block font-medium text-[16px] text-gray-800 hover:underline "
-		// 						>
-		// 							{file.name}
-		// 						</Link>
-		// 						<p className="text-xs md:text-sm text-gray-500 truncate">
-		// 							Shared by <span className="font-medium">{file.sharedBy}</span>{" "}
-		// 							on {file.sharedOn}
-		// 						</p>
-		// 					</div>
-
-		// 					{/* Download Button */}
-		// 					<a
-		// 						href={file.url}
-		// 						download
-		// 						rel="noopener noreferrer"
-		// 						className="ml-auto text-gray-400 hover:text-green-600"
-		// 					>
-		// 						<Download className="w-6 h-6 md:w-7 md:h-7" />
-		// 					</a>
-		// 				</li>
-		// 			))}
-		// 		</ul>
-		// 	) : (
-		// 		<div className="h-[45vh] flex justify-center items-center text-center text-gray-500 text-lg md:text-xl">
-		// 			No files found.
-		// 		</div>
-		// 	)}
-		// </div>
 	);
 };
 
 export default ChatFilesSection;
+
+// import React from "react";
+// import { Link } from "react-router-dom";
+// import { Download } from "lucide-react";
+
+// import pdfIcon from "/icons/pdf.png";
+// import csvIcon from "/icons/csv.png";
+// import wordIcon from "/icons/word.png";
+// import excelIcon from "/icons/excel.webp";
+// import pptIcon from "/icons/powerpoint.png";
+// import { FileItem } from "../types/File";
+
+// interface Props {
+// 	fileData: FileItem[];
+// }
+
+// const ChatFilesSection: React.FC<Props> = ({ fileData }) => {
+// 	const getFileIcon = (type: FileItem["type"]) => {
+// 		const commonClass = "h-8 w-8 md:h-10 md:w-10";
+// 		switch (type) {
+// 			case "pdf":
+// 				return <img src={pdfIcon} alt="PDF" className={commonClass} />;
+// 			case "csv":
+// 				return <img src={csvIcon} alt="CSV" className={commonClass} />;
+// 			case "docx":
+// 				return <img src={wordIcon} alt="Word" className={commonClass} />;
+// 			case "xlsx":
+// 				return <img src={excelIcon} alt="Excel" className={commonClass} />;
+// 			case "pptx":
+// 				return <img src={pptIcon} alt="PowerPoint" className={commonClass} />;
+// 			default:
+// 				return <div className={`${commonClass} bg-gray-300 rounded`} />;
+// 		}
+// 	};
+
+// 	return (
+// 		<div className=" py-4 md:py-6 rounded-2xl w-full">
+// 			{fileData.length > 0 ? (
+// 				<ul>
+// 					{fileData.map((file, index) => (
+// 						<li
+// 							key={index}
+// 							className="hover:bg-background-primary flex items-center gap-3 px-4 py-3 sm:px-6 sm:py-4 border-b last:border-none border-border/30"
+// 						>
+// 							{/* Icon */}
+// 							<div className="flex-shrink-0">{getFileIcon(file.type)}</div>
+
+// 							{/* File Info */}
+// 							<div className="flex-1 min-w-0">
+// 								<Link
+// 									to={`file?url=${encodeURIComponent(file.url)}&id=${file.id}&vendor=${file.vendor.name}`}
+// 									className="block font-medium text-[16px] text-gray-800 "
+// 								>
+// 									{file.name}
+// 								</Link>
+// 								<p className="text-[10px] text-gray-500 truncate">
+// 									Shared by <span className="font-medium">{file.sharedBy}</span>{" "}
+// 									on {file.sharedOn}
+// 								</p>
+// 							</div>
+
+// 							{/* Download Button */}
+// 							<a
+// 								href={file.url}
+// 								download
+// 								rel="noopener noreferrer"
+// 								className="ml-auto text-gray-400 hover:text-green-600"
+// 							>
+// 								<Download className="w-6 h-6 md:w-7 md:h-7" />
+// 							</a>
+// 						</li>
+// 					))}
+// 				</ul>
+// 			) : (
+// 				<div className="h-[45vh] flex justify-center items-center text-center text-gray-500 text-lg md:text-xl">
+// 					No files found.
+// 				</div>
+// 			)}
+// 		</div>
+// 		// <div className="bg-background-primary py-4 md:py-6 rounded-2xl w-full border border-border/30">
+// 		// 	{fileData.length > 0 ? (
+// 		// 		<ul>
+// 		// 			{fileData.map((file, index) => (
+// 		// 				<li
+// 		// 					key={index}
+// 		// 					className="flex items-center gap-3 px-4 py-3 sm:px-6 sm:py-4 border-b last:border-none border-border/30"
+// 		// 				>
+// 		// 					{/* Icon */}
+// 		// 					<div className="flex-shrink-0">{getFileIcon(file.type)}</div>
+
+// 		// 					{/* File Info */}
+// 		// 					<div className="flex-1 min-w-0">
+// 		// 						<Link
+// 		// 							to={`file?url=${encodeURIComponent(file.url)}&id=${file.id}&vendor=${file.vendor.name}`}
+// 		// 							className="block font-medium text-[16px] text-gray-800 hover:underline "
+// 		// 						>
+// 		// 							{file.name}
+// 		// 						</Link>
+// 		// 						<p className="text-xs md:text-sm text-gray-500 truncate">
+// 		// 							Shared by <span className="font-medium">{file.sharedBy}</span>{" "}
+// 		// 							on {file.sharedOn}
+// 		// 						</p>
+// 		// 					</div>
+
+// 		// 					{/* Download Button */}
+// 		// 					<a
+// 		// 						href={file.url}
+// 		// 						download
+// 		// 						rel="noopener noreferrer"
+// 		// 						className="ml-auto text-gray-400 hover:text-green-600"
+// 		// 					>
+// 		// 						<Download className="w-6 h-6 md:w-7 md:h-7" />
+// 		// 					</a>
+// 		// 				</li>
+// 		// 			))}
+// 		// 		</ul>
+// 		// 	) : (
+// 		// 		<div className="h-[45vh] flex justify-center items-center text-center text-gray-500 text-lg md:text-xl">
+// 		// 			No files found.
+// 		// 		</div>
+// 		// 	)}
+// 		// </div>
+// 	);
+// };
+
+// export default ChatFilesSection;
 
 // import React from "react";
 // import { Link } from "react-router-dom";
