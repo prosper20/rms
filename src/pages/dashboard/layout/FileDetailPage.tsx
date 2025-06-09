@@ -108,6 +108,7 @@ const FileDetailPage = () => {
 					</div>
 				</div>
 			</div>
+			<div className="p-4 bg-white shadow-md border-b text-lg font-semibold flex items-center gap-2"></div>
 		</div>
 	);
 };

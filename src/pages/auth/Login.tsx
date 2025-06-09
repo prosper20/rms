@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Lock, Sms } from "iconsax-react";
+import { Toaster } from "sonner";
 import { toast } from "sonner";
 import { FormInput } from "../../components/UI/Input/Inputs";
 import LoaderSpinnerSmall from "../../components/Loaders/LoaderSpinnerSmall";
@@ -19,6 +20,7 @@ const LoginForm = () => {
 		handleSubmit,
 		formState: { errors },
 		reset,
+		setError,
 	} = useForm<TLogin>({ resolver: zodResolver(loginSchema) });
 
 	const loginMutation = useMutation({
@@ -69,7 +71,15 @@ const LoginForm = () => {
 			}
 		},
 		onError: (err: Error) => {
-			toast.error(err.message);
+			const message = err.message;
+			if (message === "Incorrect password" || message === "User not found") {
+				setError("password", {
+					type: "manual",
+					message: "Incorrect email or password",
+				});
+			} else {
+				toast.error(message);
+			}
 		},
 	});
 
@@ -87,6 +97,12 @@ const LoginForm = () => {
 						Reporting and Incident Management System
 					</h1>
 				</div>
+				{/* <div className="absolute w-full max-w-[50rem] top-[15%] left-1/2 transform -translate-x-1/2 z-10 text-center px-8">
+					<h1 className="text-4xl md:text-4xl font-bold text-gray-700">
+						Reporting and Incident Management System
+					</h1>
+				</div> */}
+
 				{/* <div className="absolute w-full max-w-[50rem] top-[15%] left-1/2 transform -translate-x-1/2 z-10 text-center px-8">
 					<h1 className="text-4xl md:text-4xl font-bold text-gray-700">
 						Reporting and Incident Management System
@@ -163,6 +179,7 @@ const LoginForm = () => {
 					className="object-cover h-full w-full"
 				/>
 			</div>
+			<Toaster richColors position="top-right" />
 		</div>
 	);
 };
