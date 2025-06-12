@@ -7,7 +7,7 @@ import ContributionsCard from "./widgets/ContributionsCard";
 
 const DashboardHome: React.FC = () => {
 	return (
-		<section className="flex justify-between gap-[15px] max-mm:grid max-mm:grid-cols-1 ">
+		<section className="m-4 md:m-8 flex justify-between gap-[15px] max-mm:grid max-mm:grid-cols-1 ">
 			<div className="space-y-8 flex-1 max-mm:pt-14">
 				<div
 					className="
