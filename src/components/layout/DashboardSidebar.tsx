@@ -76,7 +76,7 @@ const DashboardSidebar: React.FC<{
 		onSuccess: () => {
 			toast.success("File uploaded successfully!");
 			queryClient.invalidateQueries({
-				queryKey: ["files", authUser?.vendor.toLowerCase()],
+				predicate: (query) => query.queryKey[0] === "files",
 			});
 		},
 		onError: (err: any) => {

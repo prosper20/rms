@@ -97,6 +97,11 @@ const LoginForm = () => {
 						Reporting and Incident Management System
 					</h1>
 				</div>
+				{/* <div className="absolute w-full max-w-[50rem] top-[15%] left-1/2 transform -translate-x-1/2 z-10 text-center px-8">
+					<h1 className="text-4xl md:text-4xl font-bold text-gray-700">
+						Reporting and Incident Management System
+					</h1>
+				</div> */}
 
 				{/* <div className="absolute w-full max-w-[50rem] top-[15%] left-1/2 transform -translate-x-1/2 z-10 text-center px-8">
 					<h1 className="text-4xl md:text-4xl font-bold text-gray-700">
