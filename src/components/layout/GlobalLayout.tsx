@@ -28,7 +28,8 @@ const GlobalLayout: React.FC = () => {
 
 					{/* Scrollable outlet (cards grid lives in each page) */}
 					<main
-						className={`flex-1 justify-center overflow-y-auto mx-[13px] lg:pt-[21px] lg:ml-[3%] xl:pb-[10px]`}
+						className={`flex-1 justify-center overflow-y-auto`}
+						// className={`flex-1 justify-center lg:pt-[21px] xl:pb-[10px] overflow-y-auto md:mx-8 lg:mx-[3%]`}
 					>
 						<Outlet />
 					</main>
