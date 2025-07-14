@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
+// import { ArrowLeft } from "lucide-react";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import axios from "axios";
 
@@ -11,7 +11,7 @@ interface Document {
 
 const FileDetailPage = () => {
 	const [params] = useSearchParams();
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const fileUrl = params.get("url");
 	const fileId = params.get("id");
 	const [document, setDocument] = useState<Document>({
@@ -85,7 +85,7 @@ const FileDetailPage = () => {
 
 	return (
 		<div className="h-screen w-full flex flex-col bg-gray-100">
-			<div className="p-4 bg-white shadow-md border-b text-lg font-semibold flex items-center gap-2">
+			{/* <div className="p-4 bg-white shadow-md border-b text-lg font-semibold flex items-center gap-2">
 				<button
 					onClick={() => navigate(-1)}
 					className="font-semibold text-gray-500 hover:text-black transition mt-2 ml-4"
@@ -93,7 +93,7 @@ const FileDetailPage = () => {
 				>
 					<ArrowLeft className="w-10 h-10" />
 				</button>
-			</div>
+			</div> */}
 
 			<div className="h-full w-full flex-1 overflow-hidden relative">
 				<div className="h-full w-full absolute inset-0 flex items-center justify-center bg-white">
